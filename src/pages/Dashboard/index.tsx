@@ -10,7 +10,8 @@ interface Repository {
   full_name: string;
   description: string;
   owner: {
-    login: string
+    login: string;
+    avatar_url: string;
   }
 }
 
@@ -18,18 +19,21 @@ const Dashboard: React.FC = () => {
   // Acesso ao valor digitado no input
   const [ newRepo, setNewRepo ] = useState('');
   // Armazenando os repositórios
-  const [repositories, setRepositories] = useState([]);
+  const [repositories, setRepositories] = useState<Repository[]>([]);
 
   // Lidando com a adição de novos repositórios
   async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
-    // Adição de um novo repositório
 
+    // Adição de um novo repositório
     // Consumir API do Github
     const response = await api.get(`repos/${newRepo}`);
 
     // Salvar novo repositório no estado
+    const repository = response.data;
+
     setRepositories([...repositories, repository]);
+    setNewRepo('');
   }
 
   return (
@@ -50,18 +54,20 @@ const Dashboard: React.FC = () => {
 
       {/* Card com o repositorio */}
       <Repositories>
-        <a href="teste">
-          <img
-            src="https://avatars2.githubusercontent.com/u/57191791?s=460&u=534eccc898167f9c23f52d9a0c6ca2afe27f0197&v=4"
-            alt="Daniel Hessel"
-          />
-          <div>
-            <strong>daniel21h/be-the-hero</strong>
-            <p>be-the-hero_ Resultado da 11º ediçao da Semana Omnistack utilizando Node.js, ReactJS e React Native</p>
-          </div>
+        {repositories.map(repository => (
+          <a key={repository.full_name} href="teste">
+            <img
+              src={repository.owner.avatar_url}
+              alt={repository.owner.login}
+            />
+            <div>
+              <strong>{repository.full_name}</strong>
+              <p>{repository.description}</p>
+            </div>
 
-          <FiChevronRight size={20} />
-        </a>
+            <FiChevronRight size={20} />
+          </a>
+        ))}
       </Repositories>
     </>
   );
