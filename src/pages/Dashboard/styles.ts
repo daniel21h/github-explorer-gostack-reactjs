@@ -22,8 +22,11 @@ export const Owner = styled.p`
   font-weight: bold;
   color: #a8a8b3;
   margin-top: 0px;
-  margin-left: 123px;
+  margin-left: 143px;
 
+  span {
+    color: #737380;
+  }
 `;
 
 // Estilizando input de pesquisa + botão

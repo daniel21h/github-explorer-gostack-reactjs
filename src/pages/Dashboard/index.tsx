@@ -71,7 +71,7 @@ const Dashboard: React.FC = () => {
     <>
       {/* Header da aplicação */}
       <img src={logoImg} alt="Github Explorer"/>
-      <Owner>by Daniel Hessel</Owner>
+      <Owner><span>by</span>_daniel21h</Owner>
       <Title>Explore repositórios no Github</Title>
 
       {/* Input de pesquisa de repositórios */}
