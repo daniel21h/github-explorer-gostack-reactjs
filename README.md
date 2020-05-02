@@ -3,6 +3,7 @@
 <h1 align="center">Explore repositories on Github</h1>
 
 <p align="center">"Estudar tecnologia é como se exercitar. Você só melhora com a prática"</p>
+<p align="center">Application available in: https://githubexplorerr.netlify.app</p>
 
 ## :clipboard: Description
 <p>Application for linsting Github repositories and issues.</p>

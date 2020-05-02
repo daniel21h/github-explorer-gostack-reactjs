@@ -17,6 +17,15 @@ export const Title = styled.h1`
   margin-top: 80px;
 `;
 
+export const Owner = styled.p`
+  font-size: 12px;
+  font-weight: bold;
+  color: #a8a8b3;
+  margin-top: 0px;
+  margin-left: 123px;
+
+`;
+
 // Estilizando input de pesquisa + botão
 export const Form = styled.form<FormProps>`
   margin-top: 40px;

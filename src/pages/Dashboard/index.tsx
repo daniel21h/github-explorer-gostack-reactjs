@@ -5,7 +5,7 @@ import api from '../../services/api';
 
 import logoImg from '../../assets/logo.svg';
 
-import { Title, Form, Repositories, Error } from './styles';
+import { Title, Form, Repositories, Error, Owner } from './styles';
 
 interface Repository {
   full_name: string;
@@ -71,6 +71,7 @@ const Dashboard: React.FC = () => {
     <>
       {/* Header da aplicação */}
       <img src={logoImg} alt="Github Explorer"/>
+      <Owner>by Daniel Hessel</Owner>
       <Title>Explore repositórios no Github</Title>
 
       {/* Input de pesquisa de repositórios */}
