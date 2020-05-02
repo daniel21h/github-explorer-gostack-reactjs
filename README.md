@@ -9,8 +9,6 @@
 <p>Application for linsting Github repositories and issues.</p>
 <p>Search for the name of the repository and in the answer it turns the name, description. After accessing it, starts, forks and issues will be available with the possibility of accessing them directly on Github.</p>
 
-<img align="center" src="./src/assets/githubExplorer.mp4">
-
 ## :rocket: Tecnologies
 
 This project was developed at the [RocketSeat GoStack Bootcamp](https://rocketseat.com.br/bootcamp) with the following technologies:
