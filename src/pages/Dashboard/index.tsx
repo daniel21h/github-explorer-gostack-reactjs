@@ -4,7 +4,7 @@ import api from '../../services/api';
 
 import logoImg from '../../assets/logo.svg';
 
-import { Title, Form, Repositories } from './styles';
+import { Title, Form, Repositories, Error } from './styles';
 
 interface Repository {
   full_name: string;
@@ -18,6 +18,8 @@ interface Repository {
 const Dashboard: React.FC = () => {
   // Acesso ao valor digitado no input
   const [ newRepo, setNewRepo ] = useState('');
+  // Lidando com erros
+  const [inputError, setInputError] = useState('');
   // Armazenando os repositórios
   const [repositories, setRepositories] = useState<Repository[]>([]);
 
@@ -25,15 +27,25 @@ const Dashboard: React.FC = () => {
   async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    // Adição de um novo repositório
-    // Consumir API do Github
-    const response = await api.get(`repos/${newRepo}`);
+    if (!newRepo) {
+      setInputError('Digite o autor/nome do repositório');
+      return;
+    }
 
-    // Salvar novo repositório no estado
-    const repository = response.data;
+    try {
+      // Adição de um novo repositório
+      // Consumir API do Github
+      const response = await api.get(`repos/${newRepo}`);
 
-    setRepositories([...repositories, repository]);
-    setNewRepo('');
+      // Salvar novo repositório no estado
+      const repository = response.data;
+
+      setRepositories([...repositories, repository]);
+      setNewRepo('');
+      setInputError('');
+    } catch (err) {
+      setInputError('Erro na busca por esse repositório');
+    }
   }
 
   return (
@@ -43,7 +55,7 @@ const Dashboard: React.FC = () => {
       <Title>Explore repositórios no Github</Title>
 
       {/* Input de pesquisa de repositórios */}
-      <Form onSubmit={handleAddRepository}>
+      <Form hasError={!!inputError} onSubmit={handleAddRepository}>
         <input
           value={newRepo}
           onChange={(e) => setNewRepo(e.target.value)}
@@ -51,6 +63,10 @@ const Dashboard: React.FC = () => {
         />
         <button type="submit">Pesquisar</button>
       </Form>
+
+      {/* Lidando com erros */}
+      {/* Se a variavél inputError está preenchida, eu vou retornar o erro */}
+  { inputError && <Error>{inputError}</Error> }
 
       {/* Card com o repositorio */}
       <Repositories>
